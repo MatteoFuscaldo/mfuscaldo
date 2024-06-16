@@ -1,12 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     const toggleButton = document.getElementById('toggle-button');
+    const modeIndicator = document.getElementById('mode-indicator');
+    
     toggleButton.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        // Save the mode preference to local storage
+        
         if (document.body.classList.contains('dark-mode')) {
             localStorage.setItem('mode', 'dark');
+            modeIndicator.textContent = 'Dark Mode is On';
         } else {
             localStorage.setItem('mode', 'light');
+            modeIndicator.textContent = 'Light Mode is On';
         }
     });
 
@@ -14,5 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const mode = localStorage.getItem('mode');
     if (mode === 'dark') {
         document.body.classList.add('dark-mode');
+        modeIndicator.textContent = 'Dark Mode is On';
+    } else {
+        modeIndicator.textContent = 'Light Mode is On';
     }
 });
