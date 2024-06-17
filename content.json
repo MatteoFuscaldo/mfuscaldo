@@ -1,0 +1,26 @@
+{
+  "name": "Your Name",
+  "profession": "Your Profession",
+  "about": "Placeholder for your bio. Write a brief introduction about yourself, your background, and your interests.",
+  "experience": [
+    {
+      "jobTitle": "Job Title",
+      "company": "Company Name",
+      "duration": "Duration",
+      "description": "Brief description of your role and responsibilities."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Degree",
+      "school": "School Name",
+      "years": "Years Attended",
+      "description": "Brief description of your coursework or achievements."
+    }
+  ],
+  "contact": {
+    "email": "your.email@example.com",
+    "phone": "Your Phone Number",
+    "linkedin": "https://linkedin.com/in/yourprofile"
+  }
+}
