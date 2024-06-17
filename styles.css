@@ -42,8 +42,8 @@ header {
   color: var(--header-text-color);
   padding: 1rem 0;
   display: flex;
-  justify-content: space-between; /* Distribute items horizontally */
-  align-items: center; /* Align items vertically */
+  justify-content: space-between;
+  align-items: center;
 }
 
 header h1 {
@@ -59,13 +59,10 @@ header p {
 /* Navigation styles */
 nav {
   display: flex; /* Display navigation links horizontally */
-  list-style: none; /* Remove default bullet points */
-  padding: 0;
-  margin: 0;
 }
 
 nav li {
-  margin-right: 1rem; /* Add spacing between links */
+  /* Removed - we don't need separate styles for list items anymore */
 }
 
 nav a {
@@ -75,6 +72,7 @@ nav a {
   padding: 0.5rem 1rem; /* Add some padding */
   border-radius: 5px; /* Add rounded corners */
   transition: background-color 0.3s, color 0.3s;
+  margin-right: 1rem; /* Add some spacing between links */
 }
 
 nav a:hover {
