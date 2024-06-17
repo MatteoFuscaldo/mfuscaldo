@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - My Personal Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Blog</h1>
+            <button id="toggle-button" class="toggle-button">Toggle Dark/Light Mode</button>
+            <p id="mode-indicator"></p>
+        </div>
+    </header>
+
+    <section class="blog-list">
+        <div class="container" id="blog-list">
+            <!-- Blog posts will be loaded here -->
+        </div>
+    </section>
+
+    <section class="blog-post" id="blog-post" style="display:none;">
+        <div class="container">
+            <h2 id="post-title"></h2>
+            <p id="post-date"></p>
+            <div id="post-content"></div>
+            <button onclick="showBlogList()">Back to Blog List</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
