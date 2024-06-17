@@ -1,24 +1,26 @@
+/* General styles */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
+/* Variables */
 :root {
-    --background-color: #f4f4f4;
-    --text-color: #333;
-    --header-background-color: #333;
-    --header-text-color: #fff;
-    --footer-background-color: #333;
-    --footer-text-color: #fff;
-    --job-background-color: #fff;
-    --job-text-color: #333;
-    --button-background-color: #444;
-    --button-text-color: #fff;
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --header-background-color: #333;
+  --header-text-color: #fff;
+  --footer-background-color: #333;
+  --footer-text-color: #fff;
+  --job-background-color: #fff;
+  --job-text-color: #333;
+  --button-background-color: #444;
+  --button-text-color: #fff;
 }
 
 .dark-mode {
@@ -34,21 +36,57 @@ body {
     --button-text-color: #fff;
 }
 
+/* Header styles */
+header {
+  background: var(--header-background-color);
+  color: var(--header-text-color);
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between; /* Distribute items horizontally */
+  align-items: center; /* Align items vertically */
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+header p {
+  margin: 0.5rem 0 0;
+  font-size: 1.2rem;
+}
+
+/* Navigation styles */
+nav {
+  display: flex; /* Display navigation links horizontally */
+  list-style: none; /* Remove default bullet points */
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  margin-right: 1rem; /* Add spacing between links */
+}
+
+nav a {
+  color: var(--text-color); /* Inherit text color from body */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Make links bolder */
+  padding: 0.5rem 1rem; /* Add some padding */
+  border-radius: 5px; /* Add rounded corners */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+nav a:hover {
+  background-color: var(--button-background-color); /* Change background on hover */
+  color: var(--button-text-color); /* Change text color on hover */
+}
+
 header {
     background: var(--header-background-color);
     color: var(--header-text-color);
     padding: 1rem 0;
     text-align: center;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-}
-
-header p {
-    margin: 0.5rem 0 0;
-    font-size: 1.2rem;
 }
 
 .toggle-button {
