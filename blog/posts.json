@@ -1,0 +1,14 @@
+[
+    {
+        "id": "post1",
+        "title": "First Blog Post",
+        "date": "2024-06-16",
+        "description": "This is a short description of the first blog post."
+    },
+    {
+        "id": "post2",
+        "title": "Second Blog Post",
+        "date": "2024-06-17",
+        "description": "This is a short description of the second blog post."
+    }
+]
