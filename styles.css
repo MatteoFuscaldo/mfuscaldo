@@ -72,7 +72,8 @@ nav a {
   padding: 0.5rem 1rem; /* Add some padding */
   border-radius: 5px; /* Add rounded corners */
   transition: background-color 0.3s, color 0.3s;
-  margin-right: 1rem; /* Add some spacing between links */
+  display: block;  /* Make links behave like buttons */
+  margin: 0;  /* Reset any default margins */
 }
 
 nav a:hover {
