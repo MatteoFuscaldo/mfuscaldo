@@ -71,3 +71,74 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error loading content:', error));
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Existing code for dark/light mode...
+
+    // Load and display blog list
+    if (document.getElementById('blog-list')) {
+        loadBlogList();
+    }
+
+    // Load and display a specific blog post if URL hash is set
+    if (window.location.hash) {
+        const postId = window.location.hash.substring(1);
+        loadBlogPost(postId);
+    }
+});
+
+function loadBlogList() {
+    fetch('blog/posts.json')
+        .then(response => response.json())
+        .then(posts => {
+            const blogListContainer = document.getElementById('blog-list');
+            blogListContainer.innerHTML = '';
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'blog-summary';
+                postElement.innerHTML = `
+                    <h3><a href="#${post.id}" onclick="loadBlogPost('${post.id}')">${post.title}</a></h3>
+                    <p>${post.date}</p>
+                    <p>${post.description}</p>
+                `;
+                blogListContainer.appendChild(postElement);
+            });
+        })
+        .catch(error => console.error('Error loading blog posts:', error));
+}
+
+function loadBlogPost(postId) {
+    fetch(`blog/${postId}.md`)
+        .then(response => response.text())
+        .then(markdown => {
+            const converter = new showdown.Converter();
+            const html = converter.makeHtml(markdown);
+
+            document.getElementById('post-title').textContent = getPostTitle(markdown);
+            document.getElementById('post-date').textContent = getPostDate(markdown);
+            document.getElementById('post-content').innerHTML = html;
+
+            document.getElementById('blog-list').style.display = 'none';
+            document.getElementById('blog-post').style.display = 'block';
+
+            window.location.hash = postId;
+        })
+        .catch(error => console.error('Error loading blog post:', error));
+}
+
+function getPostTitle(markdown) {
+    const titleMatch = markdown.match(/^# (.+)$/m);
+    return titleMatch ? titleMatch[1] : 'Untitled';
+}
+
+function getPostDate(markdown) {
+    const dateMatch = markdown.match(/^(\d{4}-\d{2}-\d{2})$/m);
+    return dateMatch ? dateMatch[1] : 'Unknown date';
+}
+
+function showBlogList() {
+    document.getElementById('blog-list').style.display = 'block';
+    document.getElementById('blog-post').style.display = 'none';
+    window.location.hash = '';
+}
+
