@@ -1,21 +1,21 @@
 {
-  "name": "Your Name",
-  "profession": "Your Profession",
-  "about": "Placeholder for your bio. Write a brief introduction about yourself, your background, and your interests.",
+  "name": "Matteo Fuscaldo",
+  "profession": "Data Analyst",
+  "about": "This is what I do",
   "experience": [
     {
-      "jobTitle": "Job Title",
-      "company": "Company Name",
-      "duration": "Duration",
-      "description": "Brief description of your role and responsibilities."
+      "jobTitle": "Data Analyst",
+      "company": "Booking.com",
+      "duration": "2024-03 - Present",
+      "description": "Data stuff."
     }
   ],
   "education": [
     {
-      "degree": "Degree",
-      "school": "School Name",
-      "years": "Years Attended",
-      "description": "Brief description of your coursework or achievements."
+      "degree": "Master Degree",
+      "school": "UCSC",
+      "years": "2016-2018",
+      "description": "Finance stuff."
     }
   ],
   "contact": {
