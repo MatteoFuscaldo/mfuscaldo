@@ -111,7 +111,12 @@ function loadBlogPost(postId) {
     fetch(`blog/${postId}.md`)
         .then(response => response.text())
         .then(markdown => {
-            const converter = new showdown.Converter();
+            const converter = new showdown.Converter({
+                ghCompatibleHeaderId: true,
+                simpleLineBreaks: true,
+                strikethrough: true,
+                tables: true
+            });
             const html = converter.makeHtml(markdown);
 
             document.getElementById('post-title').textContent = getPostTitle(markdown);
