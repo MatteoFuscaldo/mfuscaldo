@@ -61,19 +61,24 @@ nav {
   display: flex; /* Display navigation links horizontally */
 }
 
+nav ul {
+  list-style: none; /* Remove default list styling */
+  display: flex; /* Display list items horizontally */
+  margin: 0; /* Reset default margin */
+  padding: 0; /* Reset default padding */
+}
+
 nav li {
-  /* Removed - we don't need separate styles for list items anymore */
+  margin: 0 1rem; /* Add some spacing between links */
 }
 
 nav a {
-  color: var(--text-color); /* Inherit text color from body */
+  color: var(--header-text-color); /* Inherit text color from body */
   text-decoration: none; /* Remove underline */
   font-weight: bold; /* Make links bolder */
   padding: 0.5rem 1rem; /* Add some padding */
   border-radius: 5px; /* Add rounded corners */
   transition: background-color 0.3s, color 0.3s;
-  display: block;  /* Make links behave like buttons */
-  margin: 0;  /* Reset any default margins */
 }
 
 nav a:hover {
@@ -183,4 +188,3 @@ footer p {
     font-size: 1rem;
     transition: background-color 0.3s, color 0.3s;
 }
-
