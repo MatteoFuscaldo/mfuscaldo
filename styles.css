@@ -89,6 +89,7 @@ nav a:hover {
 .toggle-container {
   display: flex;
   align-items: center;
+  margin-right: 0.5rem; /* Adjust the margin-right value as needed */
 }
 
 .switch {
