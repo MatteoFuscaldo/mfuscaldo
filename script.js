@@ -1,28 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const toggleButton = document.getElementById('toggle-button');
-    const modeIndicator = document.getElementById('mode-indicator');
+  const toggleButton = document.getElementById('toggle-button');
+  const body = document.body;
 
-    const updateButtonAndIndicator = () => {
-        if (document.body.classList.contains('dark-mode')) {
-            toggleButton.textContent = 'Switch to Light Mode';
-            modeIndicator.textContent = 'Dark Mode is On';
-        } else {
-            toggleButton.textContent = 'Switch to Dark Mode';
-            modeIndicator.textContent = 'Light Mode is On';
-        }
-    };
+  // Check if dark mode is enabled in local storage
+  if (localStorage.getItem('dark-mode') === 'enabled') {
+    body.classList.add('dark-mode');
+    toggleButton.checked = true;
+  }
 
-    toggleButton.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
+  toggleButton.addEventListener('change', () => {
+    body.classList.toggle('dark-mode');
+    if (body.classList.contains('dark-mode')) {
+      localStorage.setItem('dark-mode', 'enabled');
+    } else {
+      localStorage.removeItem('dark-mode');
+    }
+  });
+});
 
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('mode', 'dark');
-        } else {
-            localStorage.setItem('mode', 'light');
-        }
-
-        updateButtonAndIndicator();
-    });
 
     const mode = localStorage.getItem('mode');
     if (mode === 'dark') {
