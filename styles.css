@@ -37,25 +37,38 @@ body {
 }
 
 /* Header styles */
+/* Header styles */
 header {
   background: var(--header-background-color);
   color: var(--header-text-color);
   padding: 1rem 0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center; /* Center the content horizontally */
+}
+
+header nav {
+  width: 100%; /* Ensure nav takes full width */
+  display: flex;
+  justify-content: center; /* Center the navigation links */
+  margin-bottom: 1rem; /* Add margin for spacing */
+}
+
+header .container {
+  text-align: center; /* Center the text content */
+}
+
+header .toggle-container {
+  display: flex;
   align-items: center;
+  justify-content: center; /* Center the toggle switch */
+  margin-top: 1rem; /* Add some space above the toggle switch */
 }
 
-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  text-align: center;
+header .toggle-container .switch {
+  margin: 0 0.5rem; /* Add space between the icons and switch */
 }
 
-header p {
-  margin: 0.5rem 0 0;
-  font-size: 1.2rem;
-}
 
 /* Navigation styles */
 nav {
