@@ -94,6 +94,16 @@ nav a:hover {
   color: var(--button-text-color); /* Change text color on hover */
 }
 
+/* Container styles */
+/* Ensure the container is centered and contents are centered */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 /* Toggle Container */
 /* Style the container for the light/dark mode toggle switch */
 .toggle-container {
