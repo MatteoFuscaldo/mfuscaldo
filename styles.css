@@ -21,6 +21,7 @@ body {
   --job-text-color: #333;
   --button-background-color: #444;
   --button-text-color: #fff;
+  --icon-color: #333;
 }
 
 .dark-mode {
@@ -34,41 +35,28 @@ body {
   --job-text-color: #f4f4f4;
   --button-background-color: #555;
   --button-text-color: #fff;
+  --icon-color: #f4f4f4;
 }
 
-/* Header styles */
 /* Header styles */
 header {
   background: var(--header-background-color);
   color: var(--header-text-color);
   padding: 1rem 0;
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Center the content horizontally */
-}
-
-header nav {
-  width: 100%; /* Ensure nav takes full width */
-  display: flex;
-  justify-content: center; /* Center the navigation links */
-  margin-bottom: 1rem; /* Add margin for spacing */
-}
-
-header .container {
-  text-align: center; /* Center the text content */
-}
-
-header .toggle-container {
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center; /* Center the toggle switch */
-  margin-top: 1rem; /* Add some space above the toggle switch */
 }
 
-header .toggle-container .switch {
-  margin: 0 0.5rem; /* Add space between the icons and switch */
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
 }
 
+header p {
+  margin: 0.5rem 0 0;
+  font-size: 1.2rem;
+}
 
 /* Navigation styles */
 nav {
@@ -87,7 +75,7 @@ nav li {
 }
 
 nav a {
-  color: var(--text-color);
+  color: var(--icon-color);
   text-decoration: none;
   font-weight: bold;
   padding: 0.5rem 1rem;
@@ -103,7 +91,7 @@ nav a:hover {
 .toggle-container {
   display: flex;
   align-items: center;
-  margin-right: 1rem; /* Adjusted spacing for toggle and icons */
+  margin-right: 0.5rem; /* Adjust the margin-right value as needed */
 }
 
 .switch {
@@ -111,7 +99,13 @@ nav a:hover {
   display: inline-block;
   width: 34px;
   height: 20px;
-  margin-right: 0.5rem; /* Adjusted spacing for toggle and icons */
+  margin: 0 0.5rem;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
@@ -233,5 +227,5 @@ footer p {
 /* Icon styles */
 .fas {
   font-size: 1.5rem;
-  color: var(--text-color);
+  color: var(--icon-color);
 }
