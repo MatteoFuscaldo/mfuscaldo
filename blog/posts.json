@@ -1,9 +1,9 @@
 [
     {
         "id": "post1",
-        "title": "First Blog Post",
+        "title": "Arrays of Structs",
         "date": "2024-06-16",
-        "description": "This is a short description of the first blog post."
+        "description": "Array of struct - what can they do?"
     },
     {
         "id": "post2",
