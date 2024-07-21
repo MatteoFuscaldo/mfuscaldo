@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog posts and articles by [Your Name]. Thoughts and insights on [Your Field].">
     <title>Blog - My Personal Profile</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
@@ -10,43 +11,33 @@
     <script defer src="script.js"></script>
 </head>
 <body>
-    <header>
+    <header class="header">
         <div class="container">
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
+            <h1 class="header__title">Blog</h1>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="blog.html" class="nav__link">Blog</a></li>
                 </ul>
             </nav>
-            <h1>Blog</h1>
-            <div class="toggle-container">
-                <label class="switch">
-                    <input type="checkbox" id="toggle-button">
-                    <span class="slider"></span>
-                </label>
-            </div>
         </div>
     </header>
 
-    <section class="blog-list">
-        <div class="container" id="blog-list">
-            <!-- Blog posts will be loaded here -->
-        </div>
-    </section>
+    <main>
+        <section class="section blog-list">
+            <div class="container" id="blog-list">
+                <!-- Blog posts will be loaded here -->
+            </div>
+        </section>
 
-    <section class="blog-post markdown-body" id="blog-post" style="display:none;">
-        <div class="container">
-            <h2 id="post-title"></h2>
-            <p id="post-date"></p>
-            <div id="post-content"></div>
-            <button onclick="showBlogList()">Back to Blog List</button>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Your Name. All rights reserved.</p>
-        </div>
-    </footer>
+        <section class="section blog-post markdown-body" id="blog-post" style="display:none;">
+            <div class="container">
+                <h2 id="post-title" class="blog-post__title"></h2>
+                <p id="post-date" class="blog-post__meta"></p>
+                <div id="post-content" class="blog-post__content"></div>
+                <button onclick="showBlogList()" class="button">Back to Blog List</button>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

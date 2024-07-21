@@ -8,31 +8,27 @@
 /* Variables */
 :root {
   /* Colors */
-  --color-primary: #007bff;
-  --color-secondary: #6c757d;
-  --color-success: #28a745;
-  --color-danger: #dc3545;
-  --color-warning: #ffc107;
-  --color-info: #17a2b8;
-  --color-light: #f8f9fa;
-  --color-dark: #343a40;
+  --color-primary: #ff6b6b;
+  --color-secondary: #ff9999;
+  --color-accent: #ffac41;
   
-  /* Light mode */
-  --background-color: #f4f4f4;
-  --text-color: #333;
-  --header-background-color: #333;
-  --header-text-color: #fff;
-  --footer-background-color: #333;
-  --footer-text-color: #fff;
-  --job-background-color: #fff;
-  --job-text-color: #333;
-  --button-background-color: #444;
-  --button-text-color: #fff;
-  --icon-color: #333;
+  /* Dark mode */
+  --background-color: #0d1117;
+  --text-color: #c9d1d9;
+  --header-background-color: #161b22;
+  --header-text-color: #c9d1d9;
+  --footer-background-color: #161b22;
+  --footer-text-color: #c9d1d9;
+  --card-background-color: #21262d;
+  --card-text-color: #c9d1d9;
+  --button-background-color: #238636;
+  --button-text-color: #ffffff;
+  --icon-color: #ff6b6b;
 
   /* Typography */
-  --font-family-base: 'Roboto', sans-serif;
-  --font-size-base: 1rem;
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-family-headings: var(--font-family-base);
+  --font-size-base: 14px;
   --line-height-base: 1.5;
 
   /* Spacing */
@@ -43,25 +39,10 @@
   --spacing-xl: 2rem;
 
   /* Borders */
-  --border-radius: 0.25rem;
+  --border-radius: 0;
 
   /* Transitions */
-  --transition-speed: 0.3s;
-}
-
-/* Dark mode variables */
-.dark-mode {
-  --background-color: #1e1e1e;
-  --text-color: #f4f4f4;
-  --header-background-color: #1e1e1e;
-  --header-text-color: #f4f4f4;
-  --footer-background-color: #1e1e1e;
-  --footer-text-color: #f4f4f4;
-  --job-background-color: #333;
-  --job-text-color: #f4f4f4;
-  --button-background-color: #555;
-  --button-text-color: #fff;
-  --icon-color: #f4f4f4;
+  --transition-speed: 0.2s;
 }
 
 /* Base styles */
@@ -71,8 +52,20 @@ body {
   line-height: var(--line-height-base);
   background-color: var(--background-color);
   color: var(--text-color);
-  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-headings);
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+h1 { font-size: 32px; }
+h2 { font-size: 24px; }
+h3 { font-size: 20px; }
+h4 { font-size: 16px; }
+h5 { font-size: 14px; }
+h6 { font-size: 12px; }
 
 /* Layout */
 .container {
@@ -87,28 +80,32 @@ body {
   background-color: var(--header-background-color);
   color: var(--header-text-color);
   padding: var(--spacing-md) 0;
+  border-bottom: 1px solid #30363d;
 }
 
 .header__content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .header__title {
-  font-size: 2.5rem;
+  font-size: 26px;
+  font-weight: 600;
   margin-bottom: var(--spacing-sm);
 }
 
 .header__subtitle {
-  font-size: 1.2rem;
+  font-size: 20px;
+  color: #8b949e;
 }
 
 /* Navigation styles */
 .nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: var(--spacing-md);
+  border-bottom: 1px solid #30363d;
 }
 
 .nav__list {
@@ -121,18 +118,17 @@ body {
 }
 
 .nav__link {
-  color: var(--icon-color);
+  color: var(--text-color);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
   padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius);
-  transition: background-color var(--transition-speed), color var(--transition-speed);
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--transition-speed);
 }
 
 .nav__link:hover,
 .nav__link:focus {
-  background-color: var(--button-background-color);
-  color: var(--button-text-color);
+  border-color: #f78166;
 }
 
 /* Container styles */
@@ -207,12 +203,15 @@ body {
 /* Section styles */
 .section {
   padding: var(--spacing-xl) 0;
+  border-bottom: 1px solid #30363d;
 }
 
 .section__title {
-  text-align: center;
+  text-align: left;
   color: var(--text-color);
   margin-bottom: var(--spacing-lg);
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .section__content {
@@ -220,27 +219,29 @@ body {
 }
 
 .card {
-  background-color: var(--job-background-color);
-  color: var(--job-text-color);
+  background-color: var(--card-background-color);
+  color: var(--card-text-color);
   padding: var(--spacing-md);
-  border-radius: var(--border-radius);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #30363d;
+  border-radius: 6px;
   margin-bottom: var(--spacing-md);
 }
 
 .card__title {
-  font-size: 1.2rem;
+  font-size: 16px;
+  font-weight: 600;
   margin-bottom: var(--spacing-sm);
+  color: var(--text-color);
 }
 
 .card__subtitle {
-  font-size: 1rem;
+  font-size: 14px;
   margin-bottom: var(--spacing-sm);
-  color: var(--color-secondary);
+  color: #8b949e;
 }
 
 .card__content {
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 /* Center the profession container */
@@ -270,31 +271,34 @@ body {
   color: var(--footer-text-color);
   text-align: center;
   padding: var(--spacing-md) 0;
+  border-top: 1px solid #30363d;
 }
 
 .footer__content {
-  font-size: 0.9rem;
+  font-size: 12px;
+  color: #8b949e;
 }
 
 /* Blog styles */
 .blog-list__item {
   padding: var(--spacing-md);
-  border-bottom: 1px solid var(--color-light);
+  border-bottom: 1px solid #30363d;
 }
 
 .blog-list__title {
-  font-size: 1.2rem;
+  font-size: 16px;
+  font-weight: 600;
   margin-bottom: var(--spacing-sm);
 }
 
 .blog-list__meta {
-  font-size: 0.9rem;
-  color: var(--color-secondary);
+  font-size: 12px;
+  color: #8b949e;
   margin-bottom: var(--spacing-sm);
 }
 
 .blog-list__summary {
-  font-size: 1rem;
+  font-size: 14px;
 }
 
 .blog-post {
@@ -302,7 +306,8 @@ body {
 }
 
 .blog-post__title {
-  font-size: 2rem;
+  font-size: 24px;
+  font-weight: 600;
   margin-bottom: var(--spacing-md);
 }
 
@@ -312,29 +317,30 @@ body {
 
 .button {
   display: inline-block;
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 5px 16px;
   background-color: var(--button-background-color);
   color: var(--button-text-color);
-  border: none;
-  border-radius: var(--border-radius);
+  border: 1px solid rgba(240,246,252,0.1);
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 14px;
+  font-weight: 500;
   text-decoration: none;
-  transition: background-color var(--transition-speed), color var(--transition-speed);
+  transition: background-color 0.2s;
 }
 
 .button:hover,
 .button:focus {
-  background-color: var(--color-primary);
+  background-color: #2ea043;
 }
 
 /* Icon styles */
 .icon {
-  font-size: 1.5rem;
-  color: var(--icon-color);
-  transition: color var(--transition-speed);
+  font-size: 16px;
+  color: #8b949e;
+  transition: color 0.2s;
 }
 
 .icon:hover {
-  color: var(--color-primary);
+  color: var(--text-color);
 }

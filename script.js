@@ -1,32 +1,12 @@
 (function() {
   'use strict';
 
-  /**
-   * Toggles dark mode and saves the preference to local storage.
-   * @param {HTMLElement} body - The document body element.
-   * @param {HTMLInputElement} toggleButton - The dark mode toggle button.
-   */
-  function toggleDarkMode(body, toggleButton) {
-    body.classList.toggle('dark-mode');
-    if (body.classList.contains('dark-mode')) {
-      localStorage.setItem('dark-mode', 'enabled');
-    } else {
-      localStorage.removeItem('dark-mode');
-    }
-  }
-
-  /**
-   * Initializes dark mode based on saved preference.
-   * @param {HTMLElement} body - The document body element.
-   * @param {HTMLInputElement} toggleButton - The dark mode toggle button.
-   */
-  function initDarkMode(body, toggleButton) {
-    if (localStorage.getItem('dark-mode') === 'enabled') {
-      body.classList.add('dark-mode');
-      toggleButton.checked = true;
-    }
-    toggleButton.addEventListener('change', () => toggleDarkMode(body, toggleButton));
-  }
+  console.log(`
+  _____                     _ 
+ |  _  |___ ___ ___ ___ ___| |
+ |   __| -_|  _|  _| . |   | |
+ |__|  |___|_| |_| |___|_|_|_|
+  `);
 
   /**
    * Fetches and applies content from a JSON file.
@@ -35,9 +15,11 @@
    */
   async function loadContent(url) {
     try {
+      console.log(`Fetching content from ${url}...`);
       const response = await fetch(url);
-      if (!response.ok) throw new Error('Network response was not ok');
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
+      console.log('Content loaded successfully.');
 
       const elements = {
         name: document.getElementById('name'),
@@ -48,41 +30,31 @@
         education: document.getElementById('education')
       };
 
-      if (elements.name) elements.name.textContent = data.name;
-      if (elements.profession) elements.profession.textContent = data.profession;
-      if (elements.about) elements.about.textContent = data.about;
-      if (elements.linkedin) {
-        elements.linkedin.textContent = data.contact.linkedin;
-        elements.linkedin.href = data.contact.linkedin;
-      }
+      Object.entries(elements).forEach(([key, element]) => {
+        if (element && data[key]) {
+          if (key === 'linkedin') {
+            element.textContent = data.contact.linkedin;
+            element.href = data.contact.linkedin;
+          } else if (key === 'experience' || key === 'education') {
+            element.innerHTML = '';
+            data[key].forEach(item => {
+              const div = document.createElement('div');
+              div.className = key === 'experience' ? 'card job' : 'card school';
+              div.innerHTML = `
+                <h3 class="card__title">${item.jobTitle || item.degree}</h3>
+                <p class="card__subtitle">${item.company || item.school}</p>
+                <p>${item.duration || item.years}</p>
+                <p class="card__content">${item.description}</p>
+              `;
+              element.appendChild(div);
+            });
+          } else {
+            element.textContent = data[key];
+          }
+        }
+      });
 
-      if (elements.experience) {
-        data.experience.forEach(job => {
-          const jobDiv = document.createElement('div');
-          jobDiv.className = 'job';
-          jobDiv.innerHTML = `
-            <h3>${job.jobTitle}</h3>
-            <p>${job.company}</p>
-            <p>${job.duration}</p>
-            <p>${job.description}</p>
-          `;
-          elements.experience.appendChild(jobDiv);
-        });
-      }
-
-      if (elements.education) {
-        data.education.forEach(school => {
-          const schoolDiv = document.createElement('div');
-          schoolDiv.className = 'school';
-          schoolDiv.innerHTML = `
-            <h3>${school.degree}</h3>
-            <p>${school.school}</p>
-            <p>${school.years}</p>
-            <p>${school.description}</p>
-          `;
-          elements.education.appendChild(schoolDiv);
-        });
-      }
+      console.log('Content applied to DOM.');
     } catch (error) {
       console.error('Error loading content:', error);
     }
@@ -189,13 +161,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    const body = document.body;
-    const toggleButton = document.getElementById('toggle-button');
-
-    if (body && toggleButton) {
-      initDarkMode(body, toggleButton);
-    }
-
+    console.log('DOM fully loaded and parsed.');
     loadContent('content.json');
 
     if (document.getElementById('blog-list')) {
