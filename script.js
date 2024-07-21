@@ -1,78 +1,106 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const toggleButton = document.getElementById('toggle-button');
-  const body = document.body;
+(function() {
+  'use strict';
 
-  // Check if dark mode is enabled in local storage
-  if (localStorage.getItem('dark-mode') === 'enabled') {
-    body.classList.add('dark-mode');
-    toggleButton.checked = true;
-  }
-
-  toggleButton.addEventListener('change', () => {
+  /**
+   * Toggles dark mode and saves the preference to local storage.
+   * @param {HTMLElement} body - The document body element.
+   * @param {HTMLInputElement} toggleButton - The dark mode toggle button.
+   */
+  function toggleDarkMode(body, toggleButton) {
     body.classList.toggle('dark-mode');
     if (body.classList.contains('dark-mode')) {
       localStorage.setItem('dark-mode', 'enabled');
     } else {
       localStorage.removeItem('dark-mode');
     }
-  });
-
-  // Fetch and apply content from the JSON file
-  fetch('content.json')
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById('name').textContent = data.name;
-      document.getElementById('profession').textContent = data.profession;
-      document.getElementById('about').textContent = data.about;
-      const linkedin = document.getElementById('linkedin');
-      linkedin.textContent = data.contact.linkedin;
-      linkedin.href = data.contact.linkedin;
-
-      const experienceContainer = document.getElementById('experience');
-      data.experience.forEach(job => {
-        const jobDiv = document.createElement('div');
-        jobDiv.className = 'job';
-        jobDiv.innerHTML = `
-          <h3>${job.jobTitle}</h3>
-          <p>${job.company}</p>
-          <p>${job.duration}</p>
-          <p>${job.description}</p>
-        `;
-        experienceContainer.appendChild(jobDiv);
-      });
-
-      const educationContainer = document.getElementById('education');
-      data.education.forEach(school => {
-        const schoolDiv = document.createElement('div');
-        schoolDiv.className = 'school';
-        schoolDiv.innerHTML = `
-          <h3>${school.degree}</h3>
-          <p>${school.school}</p>
-          <p>${school.years}</p>
-          <p>${school.description}</p>
-        `;
-        educationContainer.appendChild(schoolDiv);
-      });
-    })
-    .catch(error => console.error('Error loading content:', error));
-
-  // Load and display blog list if on the blog page
-  if (document.getElementById('blog-list')) {
-    loadBlogList();
   }
 
-  // Load and display a specific blog post if URL hash is set
-  if (window.location.hash) {
-    const postId = window.location.hash.substring(1);
-    loadBlogPost(postId);
+  /**
+   * Initializes dark mode based on saved preference.
+   * @param {HTMLElement} body - The document body element.
+   * @param {HTMLInputElement} toggleButton - The dark mode toggle button.
+   */
+  function initDarkMode(body, toggleButton) {
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+      body.classList.add('dark-mode');
+      toggleButton.checked = true;
+    }
+    toggleButton.addEventListener('change', () => toggleDarkMode(body, toggleButton));
   }
-});
 
-function loadBlogList() {
-  fetch('blog/posts.json')
-    .then(response => response.json())
-    .then(posts => {
+  /**
+   * Fetches and applies content from a JSON file.
+   * @param {string} url - The URL of the JSON file.
+   * @returns {Promise<void>}
+   */
+  async function loadContent(url) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Network response was not ok');
+      const data = await response.json();
+
+      const elements = {
+        name: document.getElementById('name'),
+        profession: document.getElementById('profession'),
+        about: document.getElementById('about'),
+        linkedin: document.getElementById('linkedin'),
+        experience: document.getElementById('experience'),
+        education: document.getElementById('education')
+      };
+
+      if (elements.name) elements.name.textContent = data.name;
+      if (elements.profession) elements.profession.textContent = data.profession;
+      if (elements.about) elements.about.textContent = data.about;
+      if (elements.linkedin) {
+        elements.linkedin.textContent = data.contact.linkedin;
+        elements.linkedin.href = data.contact.linkedin;
+      }
+
+      if (elements.experience) {
+        data.experience.forEach(job => {
+          const jobDiv = document.createElement('div');
+          jobDiv.className = 'job';
+          jobDiv.innerHTML = `
+            <h3>${job.jobTitle}</h3>
+            <p>${job.company}</p>
+            <p>${job.duration}</p>
+            <p>${job.description}</p>
+          `;
+          elements.experience.appendChild(jobDiv);
+        });
+      }
+
+      if (elements.education) {
+        data.education.forEach(school => {
+          const schoolDiv = document.createElement('div');
+          schoolDiv.className = 'school';
+          schoolDiv.innerHTML = `
+            <h3>${school.degree}</h3>
+            <p>${school.school}</p>
+            <p>${school.years}</p>
+            <p>${school.description}</p>
+          `;
+          elements.education.appendChild(schoolDiv);
+        });
+      }
+    } catch (error) {
+      console.error('Error loading content:', error);
+    }
+  }
+
+  /**
+   * Loads and displays the blog list.
+   * @returns {Promise<void>}
+   */
+  async function loadBlogList() {
+    try {
+      const response = await fetch('blog/posts.json');
+      if (!response.ok) throw new Error('Network response was not ok');
+      const posts = await response.json();
+
       const blogListContainer = document.getElementById('blog-list');
+      if (!blogListContainer) return;
+
       blogListContainer.innerHTML = '';
       posts.forEach(post => {
         const postElement = document.createElement('div');
@@ -84,14 +112,22 @@ function loadBlogList() {
         `;
         blogListContainer.appendChild(postElement);
       });
-    })
-    .catch(error => console.error('Error loading blog posts:', error));
-}
+    } catch (error) {
+      console.error('Error loading blog posts:', error);
+    }
+  }
 
-function loadBlogPost(postId) {
-  fetch(`blog/${postId}.md`)
-    .then(response => response.text())
-    .then(markdown => {
+  /**
+   * Loads and displays a specific blog post.
+   * @param {string} postId - The ID of the blog post to load.
+   * @returns {Promise<void>}
+   */
+  async function loadBlogPost(postId) {
+    try {
+      const response = await fetch(`blog/${postId}.md`);
+      if (!response.ok) throw new Error('Network response was not ok');
+      const markdown = await response.text();
+
       const converter = new showdown.Converter({
         ghCompatibleHeaderId: true,
         simpleLineBreaks: true,
@@ -100,30 +136,79 @@ function loadBlogPost(postId) {
       });
       const html = converter.makeHtml(markdown);
 
-      document.getElementById('post-title').textContent = getPostTitle(markdown);
-      document.getElementById('post-date').textContent = getPostDate(markdown);
-      document.getElementById('post-content').innerHTML = html;
+      const elements = {
+        title: document.getElementById('post-title'),
+        date: document.getElementById('post-date'),
+        content: document.getElementById('post-content'),
+        list: document.getElementById('blog-list'),
+        post: document.getElementById('blog-post')
+      };
 
-      document.getElementById('blog-list').style.display = 'none';
-      document.getElementById('blog-post').style.display = 'block';
+      if (elements.title) elements.title.textContent = getPostTitle(markdown);
+      if (elements.date) elements.date.textContent = getPostDate(markdown);
+      if (elements.content) elements.content.innerHTML = html;
+
+      if (elements.list) elements.list.style.display = 'none';
+      if (elements.post) elements.post.style.display = 'block';
 
       window.location.hash = postId;
-    })
-    .catch(error => console.error('Error loading blog post:', error));
-}
+    } catch (error) {
+      console.error('Error loading blog post:', error);
+    }
+  }
 
-function getPostTitle(markdown) {
-  const titleMatch = markdown.match(/^# (.+)$/m);
-  return titleMatch ? titleMatch[1] : 'Untitled';
-}
+  /**
+   * Extracts the title from a markdown string.
+   * @param {string} markdown - The markdown content.
+   * @returns {string} The extracted title or 'Untitled'.
+   */
+  function getPostTitle(markdown) {
+    const titleMatch = markdown.match(/^# (.+)$/m);
+    return titleMatch ? titleMatch[1] : 'Untitled';
+  }
 
-function getPostDate(markdown) {
-  const dateMatch = markdown.match(/^(\d{4}-\d{2}-\d{2})$/m);
-  return dateMatch ? dateMatch[1] : 'Unknown date';
-}
+  /**
+   * Extracts the date from a markdown string.
+   * @param {string} markdown - The markdown content.
+   * @returns {string} The extracted date or 'Unknown date'.
+   */
+  function getPostDate(markdown) {
+    const dateMatch = markdown.match(/^(\d{4}-\d{2}-\d{2})$/m);
+    return dateMatch ? dateMatch[1] : 'Unknown date';
+  }
 
-function showBlogList() {
-  document.getElementById('blog-list').style.display = 'block';
-  document.getElementById('blog-post').style.display = 'none';
-  window.location.hash = '';
-}
+  /**
+   * Shows the blog list and hides the blog post.
+   */
+  function showBlogList() {
+    const blogList = document.getElementById('blog-list');
+    const blogPost = document.getElementById('blog-post');
+    if (blogList) blogList.style.display = 'block';
+    if (blogPost) blogPost.style.display = 'none';
+    window.location.hash = '';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const toggleButton = document.getElementById('toggle-button');
+
+    if (body && toggleButton) {
+      initDarkMode(body, toggleButton);
+    }
+
+    loadContent('content.json');
+
+    if (document.getElementById('blog-list')) {
+      loadBlogList();
+    }
+
+    if (window.location.hash) {
+      const postId = window.location.hash.substring(1);
+      loadBlogPost(postId);
+    }
+  });
+
+  // Expose necessary functions to the global scope
+  window.loadBlogPost = loadBlogPost;
+  window.showBlogList = showBlogList;
+})();
