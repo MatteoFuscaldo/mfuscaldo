@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- Personal profile website with dynamic content loading and dark mode support -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal profile and blog of [Your Name]. Showcasing professional experience, education, and thoughts on [Your Field].">
   <title>My Personal Profile</title>
   <link rel="stylesheet" href="styles.css">
   <script defer src="script.js"></script>
@@ -14,20 +16,23 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="blog.html">Blog</a></li>
       </ul>
+      <div class="toggle-container">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <label class="switch">
+          <input type="checkbox" id="toggle-button" aria-label="Toggle dark mode">
+          <span class="slider"></span>
+        </label>
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </div>
     </nav>
     <div class="container">
       <h1 id="name">Your Name</h1>
       <p id="profession">Your Profession</p>
-      <div class="toggle-container">
-        <i class="fas fa-sun"></i>
-        <label class="switch">
-          <input type="checkbox" id="toggle-button">
-          <span class="slider"></span>
-        </label>
-        <i class="fas fa-moon"></i>
-      </div>
     </div>
   </header>
+
+  <main>
+    <!-- Main content sections -->
 
   <section class="about">
     <div class="container">
@@ -39,27 +44,28 @@
   <section class="experience">
     <div class="container">
       <h2>Experience</h2>
-      <div id="experience"></div>
+      <div id="experience" class="experience-list"></div>
     </div>
   </section>
 
   <section class="education">
     <div class="container">
       <h2>Education</h2>
-      <div id="education"></div>
+      <div id="education" class="education-list"></div>
     </div>
   </section>
 
   <section class="contact">
     <div class="container">
       <h2>Contact</h2>
-      <p>LinkedIn: <a id="linkedin" href="#"></a></p>
+      <p>LinkedIn: <a id="linkedin" href="#" aria-label="LinkedIn profile"></a></p>
     </div>
   </section>
+  </main>
 
   <footer>
     <div class="container">
-      <p>&copy; 2024 Your Name. All rights reserved.</p>
+      <p>&copy; 2024 <span id="footer-name">Your Name</span>. All rights reserved.</p>
     </div>
   </footer>
 </body>
