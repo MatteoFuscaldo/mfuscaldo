@@ -94,6 +94,9 @@
    * @param {string} postId - The ID of the blog post to load.
    * @returns {Promise<void>}
    */
+
+
+  
   async function loadBlogPost(postId) {
     try {
       const response = await fetch(`blog/${postId}.md`);
@@ -109,8 +112,6 @@
       const html = converter.makeHtml(markdown);
 
       const elements = {
-        title: document.getElementById('post-title'),
-        date: document.getElementById('post-date'),
         content: document.getElementById('post-content'),
         list: document.getElementById('blog-list'),
         post: document.getElementById('blog-post')
